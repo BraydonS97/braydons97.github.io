@@ -29,7 +29,7 @@ window.addEventListener('load', () => {
             function WeatherCall(lat, long) {
 
                 const proxy = `https://cors-anywhere.herokuapp.com/`;
-                const current_weathercall = `http://api.weatherapi.com/v1/forecast.json?key=3236a6520fac47b1a24224928230507&q=${lat},${long}&days=5`
+                const current_weathercall = `${proxy}http://api.weatherapi.com/v1/forecast.json?key=3236a6520fac47b1a24224928230507&q=${lat},${long}&days=5`
 
                 // // Current Weather API Call
                 fetch(current_weathercall).then(response => {
