@@ -1,0 +1,348 @@
+body {
+    margin: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    background-color: rgba(18, 21, 38, 255);
+}
+
+canvas {
+    display: block;
+    float: left;
+    margin-left: 8px;
+    margin-top: 8px;
+}
+
+
+/* TOP SECTION */
+
+.top-section {
+    display: flex;
+    justify-content: center;
+    height: 75px;
+    margin-top: 25px;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 3;
+    max-width: 900px;
+    min-width: 600px;
+    height: 100%;
+    background-color: rgb(33, 42, 75);
+    margin: 0 25px 0 25px;
+    border-radius: 10px;
+}
+
+.side-bar-left {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(33, 42, 75);
+    max-width: 350px;
+    min-width: 250px;
+    height: 75px;
+    flex-grow: 1;
+    margin-left: 25px;
+    border-radius: 10px;
+}
+
+.side-bar-right {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(33, 42, 75);
+    max-width: 350px;
+    min-width: 250px;
+    height: 75px;
+    flex-grow: 1;
+    margin-right: 25px;
+    border-radius: 10px;
+}
+
+
+/* MIDDLE SECTION */
+
+.mid-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    margin: 25px 0 25px 0;
+}
+
+
+/* FIVE DAY FORECAST====================== */
+
+.five-day {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(33, 42, 75);
+    max-width: 350px;
+    min-width: 250px;
+    overflow: hidden;
+    /* height: 600px; */
+    height: 100%;
+    flex-grow: 1;
+    margin-left: 25px;
+    border-radius: 10px;
+}
+
+.five-day-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: auto;
+    overflow: hidden;
+    border-bottom: 0.2em solid rgb(55, 67, 114);
+    padding-bottom: 2px;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.five-day-box2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: auto;
+    overflow: hidden;
+}
+
+.FDB-top-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.FDB-date {
+    color: white;
+    font-size: 14px;
+}
+
+.FDB-temp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.FDB-high-temp {
+    position: absolute;
+    top: -12;
+    color: white;
+    font-weight: bold;
+    font-size: 42px;
+}
+
+.FDB-low-temp {
+    position: absolute;
+    top: 38;
+    color: rgb(204, 197, 197);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.FDB-middle-container,
+.FDB-left-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+.FDB-right-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+.FDB-icon-container {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.FDB-info-container {
+    gap: 7px;
+    display: flex;
+    flex-direction: column;
+}
+
+.FDB-windspeed,
+.FDB-precip,
+.FDB-weather-desc {
+    color: white;
+    font-size: 14px;
+    font-weight: 100;
+    white-space: nowrap;
+}
+
+.con-icons {
+    color: white;
+    margin: 10px;
+}
+
+.wind-container,
+.precip-container {
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* RADAR */
+
+.weather-map {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 3;
+    max-width: 900px;
+    min-width: 600px;
+    height: 100%;
+    background-color: rgb(33, 42, 75);
+    margin: 0 25px 0 25px;
+    border-radius: 10px;
+}
+
+
+/* CURRENT FORECAST */
+
+.current-forecast {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(33, 42, 75);
+    max-width: 350px;
+    min-width: 250px;
+    height: 100%;
+    flex-grow: 1;
+    margin-right: 25px;
+    border-radius: 10px;
+}
+
+
+/* .current-icon {
+    width: 50%;
+} */
+
+.current-container-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50%;
+    gap: 10px;
+}
+
+.current-container-bot {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10%;
+    height: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.current-temp {
+    font-size: 52px;
+}
+
+.current-weather-desc,
+.current-location {
+    padding-top: 6px;
+    font-size: 24px;
+}
+
+.data-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    border-bottom: 0.2em solid rgb(55, 67, 114);
+}
+
+.condition-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 50%;
+    background-color: red;
+    gap: 5px;
+}
+
+.con-text {
+    font-size: 16px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.last-updated {
+    align-self: center;
+    justify-self: center;
+    margin-bottom: 6px;
+}
+
+
+/* BOT SECTION */
+
+.bot-section {
+    display: flex;
+    justify-content: center;
+    height: 150px;
+    margin-top: 25px;
+}
+
+.bot-side-bar-left {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(33, 42, 75);
+    max-width: 350px;
+    min-width: 250px;
+    height: 150px;
+    flex-grow: 1;
+    margin-left: 25px;
+    border-radius: 10px;
+}
+
+.bot-side-bar-right {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(33, 42, 75);
+    max-width: 350px;
+    min-width: 250px;
+    height: 150px;
+    flex-grow: 1;
+    margin-right: 25px;
+    border-radius: 10px;
+}
+
+.extended-forecast {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 3;
+    max-width: 900px;
+    min-width: 600px;
+    height: 100%;
+    background-color: rgb(33, 42, 75);
+    margin: 0 25px 0 25px;
+    border-radius: 10px;
+}
+
+.text {
+    padding-top: 6px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-bottom: 0.2em solid rgb(55, 67, 114);
+    margin-left: 3%;
+    margin-right: 3%;
+}

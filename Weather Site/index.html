@@ -1,0 +1,266 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <script src="skycons.js"></script>
+    <script src="https://kit.fontawesome.com/e2cd09f8ce.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <title>Weather Site - Braydon</title>
+</head>
+
+
+
+
+<body>
+
+
+    <!-- <figure class="icons">
+        <canvas id="icon1" height="256" width="256"></canvas>
+    </figure> -->
+
+
+    <div class="top-section">
+
+        <div class="side-bar-left">
+            <a class="text">WARNING</a>
+        </div>
+
+        <div class="search-bar">
+        </div>
+
+        <div class="side-bar-right">
+            <a class="text">FIVE DAY</a>
+        </div>
+
+    </div>
+
+
+    <div class="mid-section">
+
+        <div class="five-day">
+            <div class="text">FIVE DAY</div>
+            <div class="five-day-box">
+                <div class="FDB-top-container">
+                    <span class="FDB-date">4/20</span>
+                </div>
+
+                <div class="FDB-left-container">
+                    <div class="FDB-temp">
+                        <span class="FDB-high-temp">100°</span>
+                        <span class="FDB-low-temp">69°</span>
+                    </div>
+                </div>
+
+                <div class="FDB-middle-container">
+                    <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
+                    <div class="FDB-weather-desc"> test</div>
+                </div>
+
+                <div class="FDB-right-container">
+                    <div class="FDB-icon-container">
+                        <i class="con-icons fa-solid fa-wind fa-sm"></i>
+                        <i class="con-icons fa-solid fa-droplet fa-sm"></i>
+                    </div>
+
+                    <div class="FDB-info-container">
+                        <div class="FDB-windspeed">7 mph</div>
+                        <div class="FDB-precip">50%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="five-day-box">
+                <div class="FDB-top-container">
+                    <span class="FDB-date">4/20</span>
+                </div>
+
+                <div class="FDB-left-container">
+                    <div class="FDB-temp">
+                        <span class="FDB-high-temp">100°</span>
+                        <span class="FDB-low-temp">69°</span>
+                    </div>
+                </div>
+
+                <div class="FDB-middle-container">
+                    <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
+                    <div class="FDB-weather-desc"> test</div>
+                </div>
+
+                <div class="FDB-right-container">
+                    <div class="FDB-icon-container">
+                        <i class="con-icons fa-solid fa-wind fa-sm"></i>
+                        <i class="con-icons fa-solid fa-droplet fa-sm"></i>
+                    </div>
+
+                    <div class="FDB-info-container">
+                        <div class="FDB-windspeed">7 mph</div>
+                        <div class="FDB-precip">50%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="five-day-box">
+                <div class="FDB-top-container">
+                    <span class="FDB-date">4/20</span>
+                </div>
+
+                <div class="FDB-left-container">
+                    <div class="FDB-temp">
+                        <span class="FDB-high-temp">100°</span>
+                        <span class="FDB-low-temp">69°</span>
+                    </div>
+                </div>
+
+                <div class="FDB-middle-container">
+                    <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
+                    <div class="FDB-weather-desc"> test</div>
+                </div>
+
+                <div class="FDB-right-container">
+                    <div class="FDB-icon-container">
+                        <i class="con-icons fa-solid fa-wind fa-sm"></i>
+                        <i class="con-icons fa-solid fa-droplet fa-sm"></i>
+                    </div>
+
+                    <div class="FDB-info-container">
+                        <div class="FDB-windspeed">7 mph</div>
+                        <div class="FDB-precip">50%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="five-day-box">
+                <div class="FDB-top-container">
+                    <span class="FDB-date">4/20</span>
+                </div>
+
+                <div class="FDB-left-container">
+                    <div class="FDB-temp">
+                        <span class="FDB-high-temp">100°</span>
+                        <span class="FDB-low-temp">69°</span>
+                    </div>
+                </div>
+
+                <div class="FDB-middle-container">
+                    <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
+                    <div class="FDB-weather-desc"> test</div>
+                </div>
+
+                <div class="FDB-right-container">
+                    <div class="FDB-icon-container">
+                        <i class="con-icons fa-solid fa-wind fa-sm"></i>
+                        <i class="con-icons fa-solid fa-droplet fa-sm"></i>
+                    </div>
+
+                    <div class="FDB-info-container">
+                        <div class="FDB-windspeed">7 mph</div>
+                        <div class="FDB-precip">50%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="five-day-box2">
+                <div class="FDB-top-container">
+                    <span class="FDB-date">4/20</span>
+                </div>
+
+                <div class="FDB-left-container">
+                    <div class="FDB-temp">
+                        <span class="FDB-high-temp">100°</span>
+                        <span class="FDB-low-temp">69°</span>
+                    </div>
+                </div>
+
+                <div class="FDB-middle-container">
+                    <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
+                    <div class="FDB-weather-desc"></div>
+                </div>
+
+                <div class="FDB-right-container">
+                    <div class="FDB-icon-container">
+                        <i class="con-icons fa-solid fa-wind fa-sm"></i>
+                        <i class="con-icons fa-solid fa-droplet fa-sm"></i>
+                    </div>
+
+                    <div class="FDB-info-container">
+                        <div class="FDB-windspeed">7 mph</div>
+                        <div class="FDB-precip">50%</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <!--  -->
+        <div class="weather-map" id="map">
+        </div>
+
+
+        <div class="current-forecast">
+            <div class="text">CURRENTLY</div>
+
+            <div class="current-container-top">
+
+                <div class="current-location" id="current-location">test</div>
+                <canvas class="current-icon" id="current-icon" height="112" width="112"></canvas>
+                <span class="current-temp" id="current-temp">69°</span>
+                <div class="current-weather-desc" id="current-weather-desc">Rain</div>
+            </div>
+
+            <!-- this is a test -->
+
+            <div class="current-container-bot">
+
+                <div class="data-label">
+                    <div class="con-text">Realfeel</div>
+                    <div class="current-realfeel con-text" id="current-realfeel"></div>
+                </div>
+                <div class="data-label">
+                    <div class="con-text">Humidity</div>
+                    <div class="current-humidity con-text" id="current-humidity"></div>
+                </div>
+                <div class="data-label">
+                    <div class="con-text">Wind</div>
+                    <div class="current-windspeed con-text" id="current-windspeed"></div>
+                </div>
+                <div class="data-label">
+                    <div class="con-text">Wind Gusts</div>
+                    <div class="current-windgust con-text" id="current-windgust"></div>
+                </div>
+                <div class="data-label">
+                    <div class="con-text">Visibility</div>
+                    <div class="current-visibility con-text" id="current-visibility"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="bot-section">
+        <div class="bot-side-bar-left">
+            <a class="text">FIVE DAY</a>
+        </div>
+
+        <div class="extended-forecast">
+        </div>
+
+        <div class="bot-side-bar-right">
+            <a class="text">FIVE DAY</a>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>
