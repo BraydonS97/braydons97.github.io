@@ -5,16 +5,26 @@ window.addEventListener('load', () => {
             lat = position.coords.latitude;
             long = position.coords.longitude;
 
+            // Displays weather upon load based on geolocation.
             WeatherCall(lat, long);
 
+            // Setting the maps view
             var map = L.map('map').setView([lat, long], 8);
 
-            L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=fTElpc48VoiAtH54mdqW', { attribution: '', }).addTo(map);
+            // Setting the map
+            L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=fTElpc48VoiAtH54mdqW', {
+                attribution: '',
+                tileSize: 512,
+                zoomOffset: -1
+            }).addTo(map);
 
+
+            // Map Marker
             var marker = L.marker([lat, long]).addTo(map);
-
+            // Disabling the double click zoom
             map.doubleClickZoom.disable();
-
+            // Add precipitation overlay to map in the future if I can find a good API
+            // Double clicking on the map now will remove the current marker set a new one and update the weather data based on location.
             map.on('dblclick', function(e) {
                 marker.setLatLng(e.latlng);
                 marker.addTo(map);
@@ -27,35 +37,77 @@ window.addEventListener('load', () => {
 
 
             function WeatherCall(lat, long) {
+                // Weather API
                 const current_weathercall = `https://api.weatherapi.com/v1/forecast.json?key=3236a6520fac47b1a24224928230507&q=${lat},${long}&days=5`
-
-                // // Current Weather API Call
+                    // // Current Weather API Call
                 fetch(current_weathercall).then(response => {
                     return response.json();
                 }).then(data => {
                     const { info } = data;
                     console.log(data);
-
+                    //Extracting all the necessary data for the functions.
                     const { country, name, region } = data.location;
                     const { condition, temp_f, feelslike_f, gust_mph, humidity, is_day, vis_miles, wind_dir, wind_mph, last_updated } = data.current;
                     const { forecastday } = data.forecast;
 
-                    fivedayForecast(forecastday)
-                    currentForecast(name, region, condition, temp_f, feelslike_f, wind_dir, gust_mph, wind_mph, vis_miles, humidity, is_day, last_updated);
 
+
+                    // Calling the functions that sort/display the data.
+                    fivedayForecast(forecastday);
+                    currentForecast(name, region, condition, temp_f, feelslike_f, wind_dir, gust_mph, wind_mph, vis_miles, humidity, is_day);
+                    hourlyForecast(last_updated, forecastday);
                 })
             }
 
         })
     }
 
-
 })
 
 
+function hourlyForecast(currentTime, forecastHourly) {
+    var testSplit = currentTime.split(/[ :( )]/);
+
+    var hourlyCast = merge(forecastHourly[0].hour, forecastHourly[1].hour);
+
+    //Variables
+    var hourly_time = document.getElementsByClassName("hour-time");
+    var hourly_icon = document.getElementsByClassName("hour-weather-icon");
+    var hourly_temp = document.getElementsByClassName("hour-weather-temp");
+    var hourly_precip = document.getElementsByClassName("hour-weather-precip");
+
+    // The 1 at the end makes it update for an hour earlier than current.
+    var startTime = parseInt(testSplit[1]) + 1;
+    var endingTime = startTime + 7;
+
+    for (var i = startTime; i < endingTime; i++) {
+        hourly_time[i - startTime].innerHTML = timeParse(hourlyCast[i].time).toString();
+        setIcon(hourly_icon[i - startTime], weatherCodeConverter(hourlyCast[i].condition.code));
+        hourly_temp[i - startTime].innerHTML = Math.floor(hourlyCast[i].temp_f) + "°";
+        hourly_precip[i - startTime].innerHTML = Math.floor(hourlyCast[i].chance_of_rain) + "%";
+    }
+
+}
+
+function timeParse(time) {
+    var timeStr = time.toString();
+    const test = timeStr.split(/[ :( )]/);
+
+    let timeConversion = test[1] >= 12 && (test[1] - 12 || 12) + 'PM' || (Number(test[1]) || 12) + 'AM';
+
+    return timeConversion;
+}
 
 
-function currentForecast(location, region, condition, temperature, feelsLike, windDir, windGust, windSpeed, visibility, humidity, timeofday, last_updated) {
+const merge = (first, second) => {
+    for (let i = 0; i < second.length; i++) {
+        first.push(second[i]);
+    }
+    return first;
+}
+
+
+function currentForecast(location, region, condition, temperature, feelsLike, windDir, windGust, windSpeed, visibility, humidity, timeofday) {
     var current_location = document.getElementById("current-location");
     var current_icon = document.getElementById("current-icon");
     var current_temp = document.getElementById("current-temp");
@@ -103,21 +155,19 @@ function weatherCodeConverter(code, timeofday) {
 
     const weatherCodes = []
 
-    if (code == 1000 && timeofday == 1) {
-        weatherCodes[1000] = "Sunny";
-    } else if (code == 1000 && timeofday == 0) {
-        weatherCodes[1000] = "Clear";
+    if (code == 1000 && timeofday == 0) {
+        weatherCodes[1000] = "Clear"
     } else {
         weatherCodes[1000] = "Sunny";
     }
 
-    weatherCodes[1003] = "Partly-Cloudy-Day"; // add day or night thing
+    weatherCodes[1003] = "Partly-Cloudy-Day";
     weatherCodes[1006] = "Cloudy";
     weatherCodes[1009] = "Cloudy";
-    weatherCodes[1030] = "Fog"; //Mist?
+    weatherCodes[1030] = "Fog";
     weatherCodes[1135] = "Fog";
     weatherCodes[1147] = "Fog";
-    weatherCodes[1063] = "Rain"; //Patchy rain
+    weatherCodes[1063] = "Rain";
     weatherCodes[1150] = "Rain";
     weatherCodes[1153] = "Rain";
     weatherCodes[1180] = "Rain";
@@ -132,7 +182,7 @@ function weatherCodeConverter(code, timeofday) {
     weatherCodes[1246] = "Rain";
     weatherCodes[1273] = "Rain";
     weatherCodes[1276] = "Rain";
-    weatherCodes[1087] = "Rain"; //thunderstorm
+    weatherCodes[1087] = "Rain";
     weatherCodes[1069] = "Sleet";
     weatherCodes[1072] = "Sleet";
     weatherCodes[1168] = "Sleet";
@@ -160,7 +210,6 @@ function weatherCodeConverter(code, timeofday) {
     weatherCodes[1282] = "Snow";
 
     let weatherCondition = weatherCodes[code];
-
 
     return weatherCondition;
 }
