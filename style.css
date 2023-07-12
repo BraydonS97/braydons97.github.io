@@ -24,7 +24,10 @@ canvas {
 
 .search-bar {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4em;
     flex-grow: 3;
     max-width: 900px;
     min-width: 600px;
@@ -32,6 +35,43 @@ canvas {
     background-color: rgb(33, 42, 75);
     margin: 0 25px 0 25px;
     border-radius: 10px;
+}
+
+.search-bar input {
+    padding: 10px;
+    text-align: center;
+    width: 40%;
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+    background-color: rgb(55, 67, 114);
+    color: white;
+}
+
+.search-bar input:hover {
+    background-color: rgb(92, 110, 182);
+}
+
+.search-bar input::placeholder {
+    color: black;
+    opacity: 0.8;
+}
+
+.search-bar input:focus-visible {
+    outline: none;
+}
+
+.search-bar .search {
+    background-color: rgb(55, 67, 114);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-bar .search:hover {
+    background-color: rgb(92, 110, 182);
 }
 
 .side-bar-left {

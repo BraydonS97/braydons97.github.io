@@ -1,15 +1,17 @@
 window.addEventListener('load', () => {
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
             lat = position.coords.latitude;
             long = position.coords.longitude;
 
-            // Displays weather upon load based on geolocation.
-            WeatherCall(lat, long);
+            const searchButton = document.querySelector(".search");
+            searchButton.addEventListener('click', search);
 
+            // Displays weather upon load based on geolocation.
+            // WeatherCall(lat + "," + long);
+            wc(lat + "," + long);
             // Setting the maps view
-            var map = L.map('map').setView([lat, long], 8);
+            var map = L.map('map').setView([lat, long], 10);
 
             // Setting the map
             L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=fTElpc48VoiAtH54mdqW', {
@@ -18,51 +20,66 @@ window.addEventListener('load', () => {
                 zoomOffset: -1
             }).addTo(map);
 
-
             // Map Marker
             var marker = L.marker([lat, long]).addTo(map);
             // Disabling the double click zoom
             map.doubleClickZoom.disable();
             // Add precipitation overlay to map in the future if I can find a good API
             // Double clicking on the map now will remove the current marker set a new one and update the weather data based on location.
-            map.on('dblclick', function(e) {
+            map.on('dblclick', function test(e) {
+                console.log(e.latlng);
                 marker.setLatLng(e.latlng);
                 marker.addTo(map);
                 const { lat, lng } = marker.getLatLng();
                 map.panTo([lat, lng], 8);
-
-                const test = { lat, lng };
-                WeatherCall(lat, lng);
+                const latlng = lat + "," + lng;
+                wc(latlng);
             })
 
+            function search() {
+                const loc = document.querySelector(".search-bar input").value;
+                wc(loc);
+            }
 
-            function WeatherCall(lat, long) {
-                // Weather API
-                const current_weathercall = `https://api.weatherapi.com/v1/forecast.json?key=3236a6520fac47b1a24224928230507&q=${lat},${long}&days=5`
-                    // // Current Weather API Call
+            function wc(loc) {
+
+                const current_weathercall = `https://api.weatherapi.com/v1/forecast.json?key=3236a6520fac47b1a24224928230507&q=${loc}&days=5&alerts=yes`;
+                // // Current Weather API Call
                 fetch(current_weathercall).then(response => {
                     return response.json();
                 }).then(data => {
                     const { info } = data;
                     console.log(data);
                     //Extracting all the necessary data for the functions.
-                    const { country, name, region } = data.location;
-                    const { condition, temp_f, feelslike_f, gust_mph, humidity, is_day, vis_miles, wind_dir, wind_mph, last_updated } = data.current;
+                    const { country, name, region, lat, lon } = data.location;
+                    const { condition, temp_f, feelslike_f, gust_mph, humidity, vis_miles, wind_dir, wind_mph, last_updated } = data.current;
                     const { forecastday } = data.forecast;
-
-
 
                     // Calling the functions that sort/display the data.
                     fivedayForecast(forecastday);
-                    currentForecast(name, region, condition, temp_f, feelslike_f, wind_dir, gust_mph, wind_mph, vis_miles, humidity, is_day);
+                    currentForecast(name, region, condition, temp_f, feelslike_f, wind_dir, gust_mph, wind_mph, vis_miles, humidity);
                     hourlyForecast(last_updated, forecastday);
+
+                    const latlonarr = { lat, lon };
+
+                    marker.setLatLng(latlonarr);
+                    map.panTo([lat, lon], 8);
+
                 })
+
             }
 
         })
     }
 
 })
+
+// Things to add
+// Night/Daytime theme mode button
+// C or F button
+// airquality on bottom left
+// alerts on top-left/right
+// favorites for Zipcodes on bottom right
 
 
 function hourlyForecast(currentTime, forecastHourly) {
@@ -80,9 +97,10 @@ function hourlyForecast(currentTime, forecastHourly) {
     var startTime = parseInt(testSplit[1]) + 1;
     var endingTime = startTime + 7;
 
+
     for (var i = startTime; i < endingTime; i++) {
         hourly_time[i - startTime].innerHTML = timeParse(hourlyCast[i].time).toString();
-        setIcon(hourly_icon[i - startTime], weatherCodeConverter(hourlyCast[i].condition.code));
+        setIcon(hourly_icon[i - startTime], weatherCodeConverter(hourlyCast[i].condition.code, DayOrNight(hourlyCast[i].condition.icon)));
         hourly_temp[i - startTime].innerHTML = Math.floor(hourlyCast[i].temp_f) + "°";
         hourly_precip[i - startTime].innerHTML = Math.floor(hourlyCast[i].chance_of_rain) + "%";
     }
@@ -107,7 +125,7 @@ const merge = (first, second) => {
 }
 
 
-function currentForecast(location, region, condition, temperature, feelsLike, windDir, windGust, windSpeed, visibility, humidity, timeofday) {
+function currentForecast(location, region, condition, temperature, feelsLike, windDir, windGust, windSpeed, visibility, humidity) {
     var current_location = document.getElementById("current-location");
     var current_icon = document.getElementById("current-icon");
     var current_temp = document.getElementById("current-temp");
@@ -119,7 +137,7 @@ function currentForecast(location, region, condition, temperature, feelsLike, wi
     var current_visibility = document.getElementById("current-visibility");
 
     current_location.innerHTML = location + ", " + stateNameToAbbreviation(region);
-    setIcon(current_icon, weatherCodeConverter(condition.code, timeofday));
+    setIcon(current_icon, weatherCodeConverter(condition.code, DayOrNight(condition.icon)));
     current_temp.innerHTML = Math.floor(temperature) + "°";
     current_weather.innerHTML = condition.text;
     current_realfeel.innerHTML = Math.floor(feelsLike) + "°";
@@ -151,17 +169,28 @@ function fivedayForecast(forecastdays) {
 }
 
 
-function weatherCodeConverter(code, timeofday) {
+function DayOrNight(str) {
+    var test = str.split('/');
+    return test[5];
+}
 
+
+function weatherCodeConverter(code, condition) {
     const weatherCodes = []
 
-    if (code == 1000 && timeofday == 0) {
-        weatherCodes[1000] = "Clear"
+    if (code == 1000 && condition == "Day") {
+        weatherCodes[1000] = "Sunny"
     } else {
-        weatherCodes[1000] = "Sunny";
+        weatherCodes[1000] = "Clear";
     }
 
-    weatherCodes[1003] = "Partly-Cloudy-Day";
+    if (code == 1003 && condition == "Day") {
+        weatherCodes[1003] = "partly-cloudy-day";
+    } else {
+        weatherCodes[1003] = "partly-cloudy-night";
+    }
+
+
     weatherCodes[1006] = "Cloudy";
     weatherCodes[1009] = "Cloudy";
     weatherCodes[1030] = "Fog";
@@ -294,6 +323,5 @@ function dateParse(unparsedData) {
 function setIcon(element, weatherCondition) {
     var skycons = new Skycons({ "color:": "white" });
     skycons.add(element, weatherCondition)
-        // skycons.add(id, condition)
     skycons.play();
 }
