@@ -17,6 +17,8 @@ canvas {
 
 .top-section {
     margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
     display: flex;
     justify-content: center;
     height: 75px;
@@ -103,6 +105,8 @@ canvas {
 
 .mid-section {
     margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
     display: flex;
     justify-content: center;
     height: 600px;
@@ -300,6 +304,8 @@ canvas {
 
 .bot-section {
     margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
     display: flex;
     justify-content: center;
     height: 150px;
@@ -313,6 +319,7 @@ canvas {
     background-color: rgb(33, 42, 75);
     width: 350px;
     min-width: 250px;
+    height: 175px;
     border-radius: 10px;
 }
 
@@ -378,6 +385,7 @@ canvas {
     display: flex;
     flex-direction: column;
     background-color: rgb(33, 42, 75);
+    height: 175px;
     width: 350px;
     min-width: 250px;
     border-radius: 10px;
@@ -426,6 +434,7 @@ canvas {
     gap: 0.4em;
     max-width: 900px;
     min-width: 600px;
+    height: 175px;
     border-radius: 10px;
 }
 
@@ -472,8 +481,7 @@ canvas {
     margin-right: 3%;
 }
 
-@media only screen and (max-width: 1000px) {
-    /* TOP SECTION */
+@media only screen and (max-width: 1150px) {
     .top-section {
         flex-direction: column;
         height: auto;
@@ -492,7 +500,6 @@ canvas {
         width: 600px;
         order: 2;
     }
-    /* MID OFF */
     .mid-section {
         display: flex;
         flex-direction: column;
@@ -512,12 +519,12 @@ canvas {
         width: 600px;
         order: 1;
     }
-    /* BOT SECTION */
     .bot-section {
         display: flex;
         flex-direction: column;
         height: auto;
         align-items: center;
+        margin-bottom: 25px;
     }
     .bot-side-bar-left {
         padding-bottom: 5px;
@@ -535,5 +542,19 @@ canvas {
     .AQ-container-box {
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .top-section {}
+    .side-bar-left,
+    .side-bar-right,
+    .search-bar {
+        width: 350px;
+        min-width: 300px;
+    }
+    .search-bar input {
+        width: 250px;
+        border: none;
     }
 }
