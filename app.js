@@ -46,7 +46,6 @@ window.addEventListener('load', () => {
                     return response.json();
                 }).then(data => {
                     const { info } = data;
-
                     //Extracting all the necessary data for the functions.
                     const { name, region, lat, lon } = data.location;
                     const { condition, temp_f, feelslike_f, gust_mph, humidity, vis_miles, wind_dir, wind_mph, last_updated, is_day, air_quality } = data.current;
@@ -61,8 +60,8 @@ window.addEventListener('load', () => {
                     airQuality(air_quality);
                     alert(alerts);
 
+                    // Sets new Markers position and pans to it.
                     const latlonarr = { lat, lon };
-
                     marker.setLatLng(latlonarr);
                     map.panTo([lat, lon], 8);
 
@@ -78,7 +77,6 @@ window.addEventListener('load', () => {
 // Grabs alert data and displays it in the appropriate div.
 function alert(alertdata) {
     var divs = document.getElementsByClassName("alert-template");
-    console.log(divs);
     while (divs[0]) {
         divs[0].parentNode.removeChild(divs[0]);
     }
@@ -106,7 +104,6 @@ function alert(alertdata) {
 
         document.getElementById("alert-container").appendChild(alert_template);
     }
-
 }
 
 // Grabs/Sets sunrise/sunset data to div
@@ -268,6 +265,7 @@ function weatherCodeConverter(code, isday) {
 
     weatherCodes[1006] = "Cloudy";
     weatherCodes[1009] = "Cloudy";
+    weatherCodes[1087] = "Cloudy";
     weatherCodes[1030] = "Fog";
     weatherCodes[1135] = "Fog";
     weatherCodes[1147] = "Fog";
@@ -286,7 +284,6 @@ function weatherCodeConverter(code, isday) {
     weatherCodes[1246] = "Rain";
     weatherCodes[1273] = "Rain";
     weatherCodes[1276] = "Rain";
-    weatherCodes[1087] = "Rain";
     weatherCodes[1069] = "Sleet";
     weatherCodes[1072] = "Sleet";
     weatherCodes[1168] = "Sleet";

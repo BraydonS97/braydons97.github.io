@@ -441,7 +441,7 @@ body {
 
 .hour-weather-precip,
 .hour-time {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 100;
     white-space: nowrap;
 }
@@ -602,6 +602,6 @@ body {
         font-size: 32px;
     }
     .hour-weather-precip {
-        font-size: 22px;
+        font-size: 20px;
     }
 }
