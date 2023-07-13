@@ -379,9 +379,9 @@ body {
 .alert-template {
     display: flex;
     flex-direction: column;
-    padding-left: 3%;
-    padding-right: 3%;
     padding-top: 6px;
+    align-self: center;
+    width: 94%;
     border-bottom: 0.2em solid rgb(55, 67, 114);
 }
 
