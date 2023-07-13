@@ -4,8 +4,8 @@ window.addEventListener('load', () => {
             lat = position.coords.latitude;
             long = position.coords.longitude;
 
-            // const searchButton = document.querySelector(".search");
-            // searchButton.addEventListener('click', search);
+            const searchButton = document.querySelector(".search");
+            searchButton.addEventListener('click', search);
 
 
             wc(lat + "," + long);
