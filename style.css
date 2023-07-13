@@ -5,16 +5,6 @@ body {
     background-color: rgba(18, 21, 38, 255);
 }
 
-canvas {
-    display: block;
-    float: left;
-    margin-left: 8px;
-    margin-top: 8px;
-}
-
-
-/* TOP SECTION */
-
 .top-section {
     margin-top: 25px;
     margin-left: 25px;
@@ -100,9 +90,6 @@ canvas {
     border-radius: 10px;
 }
 
-
-/* MIDDLE SECTION */
-
 .mid-section {
     margin-top: 25px;
     margin-left: 25px;
@@ -112,9 +99,6 @@ canvas {
     height: 600px;
     gap: 1.4em;
 }
-
-
-/* FIVE DAY FORECAST====================== */
 
 .five-day {
     background-color: rgb(33, 42, 75);
@@ -228,9 +212,6 @@ canvas {
     margin: 10px;
 }
 
-
-/* RADAR */
-
 .weather-map {
     display: flex;
     flex-grow: 1;
@@ -242,9 +223,6 @@ canvas {
     min-width: 600px;
     border-radius: 10px;
 }
-
-
-/* CURRENT FORECAST */
 
 .current-forecast {
     background-color: rgb(33, 42, 75);
@@ -298,9 +276,6 @@ canvas {
     margin-left: 5%;
     margin-right: 5%;
 }
-
-
-/* BOT SECTION */
 
 .bot-section {
     margin-top: 25px;
@@ -422,7 +397,6 @@ canvas {
     background-color: orangered;
     text-align: center;
     width: 100%;
-    /* border-bottom: 0.2em solid rgb(55, 67, 114); */
 }
 
 .extended-forecast {
@@ -630,5 +604,4 @@ canvas {
     .hour-weather-precip {
         font-size: 22px;
     }
-    /*  */
 }

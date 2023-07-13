@@ -1,3 +1,4 @@
+//Runs listed methods on load
 window.addEventListener('load', () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -6,28 +7,29 @@ window.addEventListener('load', () => {
 
             const searchButton = document.querySelector(".search");
             searchButton.addEventListener('click', search);
-            // 
 
+            function search() {
+                const loc = document.querySelector(".search-bar input").value;
+                wc(loc);
+            }
+
+            //Initial call of the api with LAT / LNG
             wc(lat + "," + long);
 
-            // Setting the maps view
+            //Initializing the map
             var map = L.map('map').setView([lat, long], 10);
-
-            // Setting the map
             L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=fTElpc48VoiAtH54mdqW', {
                 attribution: '',
                 tileSize: 512,
                 zoomOffset: -1
             }).addTo(map);
 
-            // Map Marker
+            // Marker
             var marker = L.marker([lat, long]).addTo(map);
-            // Disabling the double click zoom
+
+            //Replacing double click zoom on the map with Weather call function for location clicked.
             map.doubleClickZoom.disable();
-            // Add precipitation overlay to map in the future if I can find a good API
-            // Double clicking on the map now will remove the current marker set a new one and update the weather data based on location.
             map.on('dblclick', function test(e) {
-                console.log(e.latlng);
                 marker.setLatLng(e.latlng);
                 marker.addTo(map);
                 const { lat, lng } = marker.getLatLng();
@@ -36,19 +38,15 @@ window.addEventListener('load', () => {
                 wc(latlng);
             })
 
-            function search() {
-                const loc = document.querySelector(".search-bar input").value;
-                wc(loc);
-            }
-
+            // Main weather call function
             function wc(loc) {
                 const current_weathercall = `https://api.weatherapi.com/v1/forecast.json?key=3236a6520fac47b1a24224928230507&q=${loc}&days=5&alerts=yes&aqi=yes`;
-                // // Current Weather API Call
+
                 fetch(current_weathercall).then(response => {
                     return response.json();
                 }).then(data => {
                     const { info } = data;
-                    console.log(data);
+
                     //Extracting all the necessary data for the functions.
                     const { name, region, lat, lon } = data.location;
                     const { condition, temp_f, feelslike_f, gust_mph, humidity, vis_miles, wind_dir, wind_mph, last_updated, is_day, air_quality } = data.current;
@@ -77,8 +75,8 @@ window.addEventListener('load', () => {
 
 })
 
+// Grabs alert data and displays it in the appropriate div.
 function alert(alertdata) {
-    // Clear divs so when new location is searched we dont end up with 100 alerts.
     var divs = document.getElementsByClassName("alert-template");
     console.log(divs);
     while (divs[0]) {
@@ -111,9 +109,7 @@ function alert(alertdata) {
 
 }
 
-
-
-
+// Grabs/Sets sunrise/sunset data to div
 function SunriseSunset(sunsetsunrise) {
     var sunrise_text = document.getElementById("sunrise-text");
     var sunset_text = document.getElementById("sunset-text");
@@ -122,6 +118,7 @@ function SunriseSunset(sunsetsunrise) {
     sunset_text.innerHTML = sunsetsunrise[0].astro.sunset;
 }
 
+// Grabs/Sets Air Quality data to div.
 function airQuality(data) {
     var NO2 = document.getElementById("NO2-text");
     var AQ = document.getElementById("AQ-text");
@@ -138,6 +135,7 @@ function airQuality(data) {
     PM25.innerHTML = Math.floor(data.pm2_5 * 100) / 100 + " PM25";
 }
 
+// Sets background color of div and returns the Air quality condition based on index.
 function AirQualityChanger(index) {
     var element = document.getElementById("AQ-text");
 
@@ -165,7 +163,7 @@ function AirQualityChanger(index) {
     return AQIN[index];
 }
 
-
+// Gets and Sets hourly forecast
 function hourlyForecast(currentTime, forecastHourly) {
     var testSplit = currentTime.split(/[ :( )]/);
 
@@ -188,6 +186,7 @@ function hourlyForecast(currentTime, forecastHourly) {
 
 }
 
+// Formats time
 function timeParse(time) {
     var timeStr = time.toString();
     const test = timeStr.split(/[ :( )]/);
@@ -197,7 +196,7 @@ function timeParse(time) {
     return timeConversion;
 }
 
-
+// Merges arrays
 const merge = (first, second) => {
     for (let i = 0; i < second.length; i++) {
         first.push(second[i]);
@@ -205,7 +204,7 @@ const merge = (first, second) => {
     return first;
 }
 
-
+// Gets and Sets Current Forecast
 function currentForecast(location, region, condition, temperature, feelsLike, windDir, windGust, windSpeed, visibility, humidity, is_day) {
     var current_location = document.getElementById("current-location");
     var current_icon = document.getElementById("current-icon");
@@ -228,6 +227,7 @@ function currentForecast(location, region, condition, temperature, feelsLike, wi
     current_visibility.innerHTML = visibility + " mi";
 }
 
+// Gets and Sets Five day forecast
 function fivedayForecast(forecastdays) {
     var fiveday_precip = document.getElementsByClassName("FDB-precip");
     var fiveday_temphigh = document.getElementsByClassName("FDB-high-temp");
@@ -248,8 +248,8 @@ function fivedayForecast(forecastdays) {
     }
 }
 
+// Returns condition based on code.
 function weatherCodeConverter(code, isday) {
-
     const weatherCodes = []
 
     if (code == 1000 && isday == 1) {
@@ -318,6 +318,7 @@ function weatherCodeConverter(code, isday) {
     return weatherCondition;
 }
 
+// returns Abbreviation of State name
 function stateNameToAbbreviation(name) {
     let states = {
         "arizona": "AZ",
@@ -387,7 +388,7 @@ function stateNameToAbbreviation(name) {
     return null;
 }
 
-
+// Formats Date
 function dateParse(unparsedData) {
     const rawDate = unparsedData.split('-');
     var parsedDate = parseInt(rawDate[1]) + "/" + parseInt(rawDate[2]);
@@ -395,6 +396,7 @@ function dateParse(unparsedData) {
     return parsedDate;
 }
 
+// Sets the Icon based on weather condition
 function setIcon(element, weatherCondition) {
     var skycons = new Skycons({ "color:": "white" });
     skycons.add(element, weatherCondition)

@@ -11,29 +11,25 @@
     <script src="https://kit.fontawesome.com/e2cd09f8ce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <title>Weather Site - Braydon</title>
+    <title>Weather Project</title>
 </head>
-<!--  -->
+
 
 <body>
 
     <div class="top-section">
-
         <div class="side-bar-left">
             <div class="text">SUNRISE</div>
             <div id="sunrise-text" class="sunrise-text"></div>
         </div>
-
         <div class="search-bar">
             <input type="text" placeholder="Search">
             <button id="search" class="fa-solid fa-magnifying-glass search"></button>
         </div>
-
         <div class="side-bar-right">
             <div class="text">SUNSET</div>
             <div id="sunset-text" class="sunset-text"></div>
         </div>
-
     </div>
 
 
@@ -41,23 +37,21 @@
 
         <div class="five-day">
             <div class="text">FIVE DAY</div>
+
             <div class="five-day-box">
                 <div class="FDB-top-container">
-                    <span class="FDB-date">4/20</span>
+                    <span class="FDB-date"></span>
                 </div>
-
                 <div class="FDB-left-container">
                     <div class="FDB-temp">
-                        <span class="FDB-high-temp">100°</span>
-                        <span class="FDB-low-temp">69°</span>
+                        <span class="FDB-high-temp"></span>
+                        <span class="FDB-low-temp"></span>
                     </div>
                 </div>
-
                 <div class="FDB-middle-container">
                     <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
-                    <div class="FDB-weather-desc"> test</div>
+                    <div class="FDB-weather-desc"></div>
                 </div>
-
                 <div class="FDB-right-container">
                     <div class="FDB-icon-container">
                         <i class="con-icons fa-solid fa-wind fa-sm"></i>
@@ -65,119 +59,104 @@
                     </div>
 
                     <div class="FDB-info-container">
-                        <div class="FDB-windspeed">7 mph</div>
-                        <div class="FDB-precip">50%</div>
+                        <div class="FDB-windspeed"></div>
+                        <div class="FDB-precip"></div>
                     </div>
                 </div>
             </div>
 
             <div class="five-day-box">
                 <div class="FDB-top-container">
-                    <span class="FDB-date">4/20</span>
+                    <span class="FDB-date"></span>
                 </div>
-
                 <div class="FDB-left-container">
                     <div class="FDB-temp">
-                        <span class="FDB-high-temp">100°</span>
-                        <span class="FDB-low-temp">69°</span>
+                        <span class="FDB-high-temp"></span>
+                        <span class="FDB-low-temp"></span>
                     </div>
                 </div>
-
                 <div class="FDB-middle-container">
                     <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
-                    <div class="FDB-weather-desc"> test</div>
+                    <div class="FDB-weather-desc"></div>
                 </div>
-
                 <div class="FDB-right-container">
                     <div class="FDB-icon-container">
                         <i class="con-icons fa-solid fa-wind fa-sm"></i>
                         <i class="con-icons fa-solid fa-droplet fa-sm"></i>
                     </div>
-
                     <div class="FDB-info-container">
-                        <div class="FDB-windspeed">7 mph</div>
-                        <div class="FDB-precip">50%</div>
+                        <div class="FDB-windspeed"></div>
+                        <div class="FDB-precip"></div>
                     </div>
                 </div>
             </div>
 
             <div class="five-day-box">
                 <div class="FDB-top-container">
-                    <span class="FDB-date">4/20</span>
+                    <span class="FDB-date"></span>
                 </div>
-
                 <div class="FDB-left-container">
                     <div class="FDB-temp">
-                        <span class="FDB-high-temp">100°</span>
-                        <span class="FDB-low-temp">69°</span>
+                        <span class="FDB-high-temp"></span>
+                        <span class="FDB-low-temp"></span>
                     </div>
                 </div>
-
                 <div class="FDB-middle-container">
                     <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
-                    <div class="FDB-weather-desc"> test</div>
+                    <div class="FDB-weather-desc"></div>
                 </div>
-
                 <div class="FDB-right-container">
                     <div class="FDB-icon-container">
                         <i class="con-icons fa-solid fa-wind fa-sm"></i>
                         <i class="con-icons fa-solid fa-droplet fa-sm"></i>
                     </div>
-
                     <div class="FDB-info-container">
-                        <div class="FDB-windspeed">7 mph</div>
-                        <div class="FDB-precip">50%</div>
+                        <div class="FDB-windspeed"></div>
+                        <div class="FDB-precip"></div>
                     </div>
                 </div>
             </div>
 
             <div class="five-day-box">
                 <div class="FDB-top-container">
-                    <span class="FDB-date">4/20</span>
+                    <span class="FDB-date"></span>
                 </div>
-
                 <div class="FDB-left-container">
                     <div class="FDB-temp">
-                        <span class="FDB-high-temp">100°</span>
-                        <span class="FDB-low-temp">69°</span>
+                        <span class="FDB-high-temp"></span>
+                        <span class="FDB-low-temp"></span>
                     </div>
                 </div>
-
                 <div class="FDB-middle-container">
                     <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
-                    <div class="FDB-weather-desc"> test</div>
+                    <div class="FDB-weather-desc"></div>
                 </div>
-
                 <div class="FDB-right-container">
                     <div class="FDB-icon-container">
                         <i class="con-icons fa-solid fa-wind fa-sm"></i>
                         <i class="con-icons fa-solid fa-droplet fa-sm"></i>
                     </div>
-
                     <div class="FDB-info-container">
-                        <div class="FDB-windspeed">7 mph</div>
-                        <div class="FDB-precip">50%</div>
+                        <div class="FDB-windspeed"></div>
+                        <div class="FDB-precip"></div>
                     </div>
                 </div>
             </div>
 
             <div class="five-day-box2">
                 <div class="FDB-top-container">
-                    <span class="FDB-date">4/20</span>
+                    <span class="FDB-date"></span>
                 </div>
-
                 <div class="FDB-left-container">
                     <div class="FDB-temp">
-                        <span class="FDB-high-temp">100°</span>
-                        <span class="FDB-low-temp">69°</span>
+                        <span class="FDB-high-temp"></span>
+                        <span class="FDB-low-temp"></span>
                     </div>
                 </div>
-
                 <div class="FDB-middle-container">
                     <canvas class="FDB-icon" id="icon1" height="54" width="54"></canvas>
                     <div class="FDB-weather-desc"></div>
                 </div>
-
                 <div class="FDB-right-container">
                     <div class="FDB-icon-container">
                         <i class="con-icons fa-solid fa-wind fa-sm"></i>
@@ -185,24 +164,19 @@
                     </div>
 
                     <div class="FDB-info-container">
-                        <div class="FDB-windspeed">7 mph</div>
-                        <div class="FDB-precip">50%</div>
+                        <div class="FDB-windspeed"></div>
+                        <div class="FDB-precip"></div>
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
 
-        <!--  -->
         <div class="weather-map" id="map">
-
         </div>
 
 
         <div class="current-forecast">
+
             <div class="text">CURRENTLY</div>
 
             <div class="current-container-top">
@@ -211,9 +185,8 @@
                 <canvas class="current-icon" id="current-icon" height="112" width="112"></canvas>
                 <span class="current-temp" id="current-temp">69°</span>
                 <div class="current-weather-desc" id="current-weather-desc">Rain</div>
-            </div>
 
-            <!-- this is a test -->
+            </div>
 
             <div class="current-container-bot">
 
@@ -238,7 +211,6 @@
                     <div class="current-visibility con-text" id="current-visibility"></div>
                 </div>
 
-
             </div>
 
         </div>
@@ -246,17 +218,20 @@
     </div>
 
     <div class="bot-section">
+
         <div class="bot-side-bar-left">
+
             <div class="text">AIR QUALITY</div>
+
             <div class="air-quality-info-container">
                 <div class="AQ-container-box">
-                    <div id="NO2-text" class="air-quality-text NO2">0.900</div>
-                    <div id="AQ-text" class="air-quality quality">MODERATE</div>
-                    <div id="SO2-text" class="air-quality-text SO2">0.500 SO2</div>
+                    <div id="NO2-text" class="air-quality-text NO2"></div>
+                    <div id="AQ-text" class="air-quality quality"></div>
+                    <div id="SO2-text" class="air-quality-text SO2"></div>
                 </div>
                 <div class="AQ-container-box">
-                    <div id="O3-text" class="air-quality-text O3">96 O3</div>
-                    <div id="PM25-text" class="air-quality-text PM25">1.25 PM2.5</div>
+                    <div id="O3-text" class="air-quality-text O3"></div>
+                    <div id="PM25-text" class="air-quality-text PM25"></div>
                 </div>
 
             </div>
@@ -266,105 +241,105 @@
 
             <div class="hour-container">
                 <div class="hour-time">
-                    7AM
+
                 </div>
                 <div class="hour-info-container">
                     <canvas class="hour-weather-icon" id="icon1" height="54" width="54"></canvas>
                     <div class="hour-weather-temp" tag="hour-weather-temp">
-                        69
+
                     </div>
                     <div class="hour-weather-precip">
-                        69%
+
                     </div>
                 </div>
             </div>
 
             <div class="hour-container">
                 <div class="hour-time">
-                    7AM
+
                 </div>
                 <div class="hour-info-container">
                     <canvas class="hour-weather-icon" id="icon1" height="54" width="54"></canvas>
                     <div class="hour-weather-temp" tag="hour-weather-temp">
-                        69
+
                     </div>
                     <div class="hour-weather-precip">
-                        69%
+
                     </div>
                 </div>
             </div>
 
             <div class="hour-container">
                 <div class="hour-time">
-                    7AM
+
                 </div>
                 <div class="hour-info-container">
                     <canvas class="hour-weather-icon" id="icon1" height="54" width="54"></canvas>
                     <div class="hour-weather-temp" tag="hour-weather-temp">
-                        69
+
                     </div>
                     <div class="hour-weather-precip">
-                        69%
+
                     </div>
                 </div>
             </div>
 
             <div class="hour-container">
                 <div class="hour-time">
-                    7AM
+
                 </div>
                 <div class="hour-info-container">
                     <canvas class="hour-weather-icon" id="icon1" height="54" width="54"></canvas>
                     <div class="hour-weather-temp" tag="hour-weather-temp">
-                        69
+
                     </div>
                     <div class="hour-weather-precip">
-                        69%
+
                     </div>
                 </div>
             </div>
 
             <div class="hour-container">
                 <div class="hour-time">
-                    7AM
+
                 </div>
                 <div class="hour-info-container">
                     <canvas class="hour-weather-icon" id="icon1" height="54" width="54"></canvas>
                     <div class="hour-weather-temp" tag="hour-weather-temp">
-                        69
+
                     </div>
                     <div class="hour-weather-precip">
-                        69%
+
                     </div>
                 </div>
             </div>
 
             <div class="hour-container">
                 <div class="hour-time">
-                    7AM
+
                 </div>
                 <div class="hour-info-container">
                     <canvas class="hour-weather-icon" id="icon1" height="54" width="54"></canvas>
                     <div class="hour-weather-temp" tag="hour-weather-temp">
-                        69
+
                     </div>
                     <div class="hour-weather-precip">
-                        69%
+
                     </div>
                 </div>
             </div>
 
             <div class="hour-container2">
                 <div class="hour-time">
-                    7AM
+
                 </div>
                 <div class="hour-info-container">
                     <canvas class="hour-weather-icon" id="icon1" height="54" width="54"></canvas>
                     <div class="hour-weather-temp" tag="hour-weather-temp">
-                        69
+
                     </div>
                     <div class="hour-weather-precip">
-                        69%
+
                     </div>
                 </div>
             </div>
