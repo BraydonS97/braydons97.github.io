@@ -16,31 +16,29 @@ canvas {
 /* TOP SECTION */
 
 .top-section {
+    margin-top: 25px;
     display: flex;
     justify-content: center;
     height: 75px;
-    margin-top: 25px;
+    gap: 1.4em;
 }
 
 .search-bar {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-grow: 1;
+    background-color: rgb(33, 42, 75);
     align-items: center;
+    justify-content: center;
     gap: 0.4em;
-    flex-grow: 3;
     max-width: 900px;
     min-width: 600px;
-    height: 100%;
-    background-color: rgb(33, 42, 75);
-    margin: 0 25px 0 25px;
     border-radius: 10px;
 }
 
 .search-bar input {
     padding: 10px;
     text-align: center;
-    width: 40%;
+    width: 350px;
     border: none;
     border-radius: 10px;
     text-transform: uppercase;
@@ -53,8 +51,8 @@ canvas {
 }
 
 .search-bar input::placeholder {
-    color: black;
-    opacity: 0.8;
+    color: white;
+    opacity: .5;
 }
 
 .search-bar input:focus-visible {
@@ -74,27 +72,29 @@ canvas {
     background-color: rgb(92, 110, 182);
 }
 
+.sunrise-text,
+.sunset-text {
+    padding-top: 3px;
+    align-self: center;
+}
+
 .side-bar-left {
+    background-color: rgb(33, 42, 75);
     display: flex;
     flex-direction: column;
     background-color: rgb(33, 42, 75);
-    max-width: 350px;
+    width: 350px;
     min-width: 250px;
-    height: 75px;
-    flex-grow: 1;
-    margin-left: 25px;
     border-radius: 10px;
 }
 
 .side-bar-right {
+    background-color: rgb(33, 42, 75);
     display: flex;
     flex-direction: column;
     background-color: rgb(33, 42, 75);
-    max-width: 350px;
+    width: 350px;
     min-width: 250px;
-    height: 75px;
-    flex-grow: 1;
-    margin-right: 25px;
     border-radius: 10px;
 }
 
@@ -102,28 +102,23 @@ canvas {
 /* MIDDLE SECTION */
 
 .mid-section {
+    margin-top: 25px;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
     height: 600px;
-    margin: 25px 0 25px 0;
+    gap: 1.4em;
 }
 
 
 /* FIVE DAY FORECAST====================== */
 
 .five-day {
+    background-color: rgb(33, 42, 75);
     display: flex;
     flex-direction: column;
     background-color: rgb(33, 42, 75);
-    max-width: 350px;
+    width: 350px;
     min-width: 250px;
-    overflow: hidden;
-    /* height: 600px; */
-    height: 100%;
-    flex-grow: 1;
-    margin-left: 25px;
     border-radius: 10px;
 }
 
@@ -145,6 +140,9 @@ canvas {
     justify-content: space-around;
     height: auto;
     overflow: hidden;
+    padding-bottom: 2px;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 .FDB-top-container {
@@ -231,15 +229,13 @@ canvas {
 
 .weather-map {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-grow: 1;
+    background-color: rgb(33, 42, 75);
     align-items: center;
-    flex-grow: 3;
+    justify-content: center;
+    gap: 0.4em;
     max-width: 900px;
     min-width: 600px;
-    height: 100%;
-    background-color: rgb(33, 42, 75);
-    margin: 0 25px 0 25px;
     border-radius: 10px;
 }
 
@@ -247,14 +243,12 @@ canvas {
 /* CURRENT FORECAST */
 
 .current-forecast {
+    background-color: rgb(33, 42, 75);
     display: flex;
     flex-direction: column;
     background-color: rgb(33, 42, 75);
-    max-width: 350px;
+    width: 350px;
     min-width: 250px;
-    height: 100%;
-    flex-grow: 1;
-    margin-right: 25px;
     border-radius: 10px;
 }
 
@@ -305,47 +299,133 @@ canvas {
 /* BOT SECTION */
 
 .bot-section {
+    margin-top: 25px;
     display: flex;
     justify-content: center;
     height: 150px;
-    margin-top: 25px;
+    gap: 1.4em;
 }
 
 .bot-side-bar-left {
+    background-color: rgb(33, 42, 75);
     display: flex;
     flex-direction: column;
     background-color: rgb(33, 42, 75);
-    max-width: 350px;
+    width: 350px;
     min-width: 250px;
-    height: 150px;
-    flex-grow: 1;
-    margin-left: 25px;
     border-radius: 10px;
 }
 
+.air-quality-info-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
+    text-align: center;
+}
+
+.AQ-container-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    gap: 1em;
+}
+
+.O3 {
+    flex-grow: 1;
+}
+
+.quality {
+    flex-grow: 2;
+}
+
+.SO2 {
+    flex-grow: 1;
+}
+
+.NO2 {
+    flex-grow: 1;
+}
+
+.PM25 {
+    flex-grow: 1;
+}
+
+.air-quality-text {
+    align-self: center;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgb(55, 67, 114);
+}
+
+.air-quality {
+    align-self: center;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 10px;
+    padding: 5px;
+    line-height: 28px;
+    background-color: rgb(55, 67, 114);
+}
+
 .bot-side-bar-right {
+    background-color: rgb(33, 42, 75);
     display: flex;
     flex-direction: column;
     background-color: rgb(33, 42, 75);
-    max-width: 350px;
+    width: 350px;
     min-width: 250px;
-    height: 150px;
-    flex-grow: 1;
-    margin-right: 25px;
     border-radius: 10px;
+}
+
+.alert-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.alert-container::-webkit-scrollbar {
+    display: none;
+}
+
+.alert-template {
+    display: flex;
+    flex-direction: column;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 6px;
+    border-bottom: 0.2em solid rgb(55, 67, 114);
+}
+
+.time-container {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+}
+
+.event-text {
+    align-self: center;
+    padding-top: 2px;
+    background-color: orangered;
+    text-align: center;
+    width: 100%;
+    /* border-bottom: 0.2em solid rgb(55, 67, 114); */
 }
 
 .extended-forecast {
     display: flex;
-    flex-direction: row;
-    /* justify-content: center; */
+    flex-grow: 1;
+    background-color: rgb(33, 42, 75);
     align-items: center;
-    flex-grow: 3;
+    justify-content: center;
+    gap: 0.4em;
     max-width: 900px;
     min-width: 600px;
-    height: 100%;
-    background-color: rgb(33, 42, 75);
-    margin: 0 25px 0 25px;
     border-radius: 10px;
 }
 
@@ -390,4 +470,70 @@ canvas {
     border-bottom: 0.2em solid rgb(55, 67, 114);
     margin-left: 3%;
     margin-right: 3%;
+}
+
+@media only screen and (max-width: 1000px) {
+    /* TOP SECTION */
+    .top-section {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
+    .search-bar {
+        width: 600px;
+        height: 75px;
+        order: 3;
+    }
+    .side-bar-left {
+        width: 600px;
+        order: 1;
+    }
+    .side-bar-right {
+        width: 600px;
+        order: 2;
+    }
+    /* MID OFF */
+    .mid-section {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
+    .five-day {
+        order: 2;
+        width: 600px;
+    }
+    .weather-map {
+        width: 600px;
+        height: 600px;
+        order: 3;
+    }
+    .current-forecast {
+        width: 600px;
+        order: 1;
+    }
+    /* BOT SECTION */
+    .bot-section {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
+    .bot-side-bar-left {
+        padding-bottom: 5px;
+        width: 600px;
+    }
+    .bot-side-bar-right {
+        padding-bottom: 10px;
+        width: 600px;
+    }
+    .extended-forecast {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        width: 600px;
+    }
+    .AQ-container-box {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 }

@@ -18,16 +18,18 @@
     <div class="top-section">
 
         <div class="side-bar-left">
-            <!-- <a class="text">WARNING</a> -->
+            <div class="text">SUNRISE</div>
+            <div id="sunrise-text" class="sunrise-text"></div>
         </div>
 
         <div class="search-bar">
-            <input type="text" placeholder="Enter City Name">
+            <input type="text" placeholder="Search">
             <button id="search" class="fa-solid fa-magnifying-glass search"></button>
         </div>
 
         <div class="side-bar-right">
-            <!-- <a class="text">FIVE DAY</a> -->
+            <div class="text">SUNSET</div>
+            <div id="sunset-text" class="sunset-text"></div>
         </div>
 
     </div>
@@ -194,6 +196,7 @@
 
         <!--  -->
         <div class="weather-map" id="map">
+            <div class="text">CURRENTLY</div>
         </div>
 
 
@@ -242,7 +245,19 @@
 
     <div class="bot-section">
         <div class="bot-side-bar-left">
+            <div class="text">AIR QUALITY</div>
+            <div class="air-quality-info-container">
+                <div class="AQ-container-box">
+                    <div id="NO2-text" class="air-quality-text NO2">0.900</div>
+                    <div id="AQ-text" class="air-quality quality">MODERATE</div>
+                    <div id="SO2-text" class="air-quality-text SO2">0.500 SO2</div>
+                </div>
+                <div class="AQ-container-box">
+                    <div id="O3-text" class="air-quality-text O3">96 O3</div>
+                    <div id="PM25-text" class="air-quality-text PM25">1.25 PM2.5</div>
+                </div>
 
+            </div>
         </div>
 
         <div class="extended-forecast">
@@ -341,7 +356,11 @@
         </div>
 
         <div class="bot-side-bar-right">
+            <div class="text">ALERTS</div>
+            <div tag="alert-container" id="alert-container" class="alert-container">
 
+
+            </div>
         </div>
     </div>
     </div>

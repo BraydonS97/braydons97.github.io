@@ -4,12 +4,12 @@ window.addEventListener('load', () => {
             lat = position.coords.latitude;
             long = position.coords.longitude;
 
-            const searchButton = document.querySelector(".search");
-            searchButton.addEventListener('click', search);
+            // const searchButton = document.querySelector(".search");
+            // searchButton.addEventListener('click', search);
 
-            // Displays weather upon load based on geolocation.
-            // WeatherCall(lat + "," + long);
+
             wc(lat + "," + long);
+
             // Setting the maps view
             var map = L.map('map').setView([lat, long], 10);
 
@@ -42,8 +42,7 @@ window.addEventListener('load', () => {
             }
 
             function wc(loc) {
-
-                const current_weathercall = `https://api.weatherapi.com/v1/forecast.json?key=3236a6520fac47b1a24224928230507&q=${loc}&days=5&alerts=yes`;
+                const current_weathercall = `https://api.weatherapi.com/v1/forecast.json?key=3236a6520fac47b1a24224928230507&q=${loc}&days=5&alerts=yes&aqi=yes`;
                 // // Current Weather API Call
                 fetch(current_weathercall).then(response => {
                     return response.json();
@@ -51,14 +50,18 @@ window.addEventListener('load', () => {
                     const { info } = data;
                     console.log(data);
                     //Extracting all the necessary data for the functions.
-                    const { country, name, region, lat, lon } = data.location;
-                    const { condition, temp_f, feelslike_f, gust_mph, humidity, vis_miles, wind_dir, wind_mph, last_updated } = data.current;
+                    const { name, region, lat, lon } = data.location;
+                    const { condition, temp_f, feelslike_f, gust_mph, humidity, vis_miles, wind_dir, wind_mph, last_updated, is_day, air_quality } = data.current;
                     const { forecastday } = data.forecast;
+                    const { alerts } = data;
 
                     // Calling the functions that sort/display the data.
                     fivedayForecast(forecastday);
-                    currentForecast(name, region, condition, temp_f, feelslike_f, wind_dir, gust_mph, wind_mph, vis_miles, humidity);
+                    currentForecast(name, region, condition, temp_f, feelslike_f, wind_dir, gust_mph, wind_mph, vis_miles, humidity, is_day);
                     hourlyForecast(last_updated, forecastday);
+                    SunriseSunset(forecastday);
+                    airQuality(air_quality);
+                    alert(alerts);
 
                     const latlonarr = { lat, lon };
 
@@ -74,12 +77,93 @@ window.addEventListener('load', () => {
 
 })
 
-// Things to add
-// Night/Daytime theme mode button
-// C or F button
-// airquality on bottom left
-// alerts on top-left/right
-// favorites for Zipcodes on bottom right
+function alert(alertdata) {
+    // Clear divs so when new location is searched we dont end up with 100 alerts.
+    var divs = document.getElementsByClassName("alert-template");
+    console.log(divs);
+    while (divs[0]) {
+        divs[0].parentNode.removeChild(divs[0]);
+    }
+
+    for (var i = 0; i < alertdata.alert.length; i++) {
+
+        var alert_template = document.createElement("div");
+        alert_template.className = "alert-template";
+        alert_template.tagName = "alert-template";
+
+        var event_text = document.createElement("div");
+        event_text.innerHTML = alertdata.alert[i].event;
+        event_text.className = "event-text";
+        alert_template.appendChild(event_text);
+
+        var headline_text = document.createElement("div");
+        headline_text.className = "headline-text";
+        headline_text.innerHTML = alertdata.alert[i].headline;
+        alert_template.appendChild(headline_text);
+
+        var areas_text = document.createElement("div");
+        areas_text.className = "areas-text";
+        areas_text.innerHTML = alertdata.alert[i].areas;
+        alert_template.appendChild(areas_text);
+
+        document.getElementById("alert-container").appendChild(alert_template);
+    }
+
+}
+
+
+
+
+function SunriseSunset(sunsetsunrise) {
+    var sunrise_text = document.getElementById("sunrise-text");
+    var sunset_text = document.getElementById("sunset-text");
+
+    sunrise_text.innerHTML = sunsetsunrise[0].astro.sunrise;
+    sunset_text.innerHTML = sunsetsunrise[0].astro.sunset;
+}
+
+function airQuality(data) {
+    var NO2 = document.getElementById("NO2-text");
+    var AQ = document.getElementById("AQ-text");
+    var SO2 = document.getElementById("SO2-text");
+    var O3 = document.getElementById("O3-text");
+    var PM25 = document.getElementById("PM25-text");
+
+    var AQ_index = data['us-epa-index'];
+
+    NO2.innerHTML = Math.floor(data.no2 * 100) / 100 + " NO2";
+    AQ.innerHTML = AirQualityChanger(AQ_index);
+    SO2.innerHTML = Math.floor(data.so2 * 100) / 100 + " SO2";
+    O3.innerHTML = Math.floor(data.o3 * 100) / 100 + " O3";
+    PM25.innerHTML = Math.floor(data.pm2_5 * 100) / 100 + " PM25";
+}
+
+function AirQualityChanger(index) {
+    var element = document.getElementById("AQ-text");
+
+    const AQIN = []
+    if (index == 1) {
+        AQIN[1] = "GOOD";
+        element.style.backgroundColor = "#17c220";
+    } else if (index == 2) {
+        AQIN[2] = "MODERATE";
+        element.style.backgroundColor = "#aeb114";
+    } else if (index == 3) {
+        AQIN[3] = "UNHEALTHY";
+        element.style.backgroundColor = "#da681d";
+    } else if (index == 4) {
+        AQIN[4] = "BAD";
+        element.style.backgroundColor = "#d32020";
+    } else if (index == 5) {
+        AQIN[5] = "VERY BAD";
+        element.style.backgroundColor = "#461835";
+    } else {
+        AQIN[6] = "HAZARDOUS";
+        element.style.backgroundColor = "#3d0d05";
+    }
+
+    return AQIN[index];
+}
 
 
 function hourlyForecast(currentTime, forecastHourly) {
@@ -87,20 +171,17 @@ function hourlyForecast(currentTime, forecastHourly) {
 
     var hourlyCast = merge(forecastHourly[0].hour, forecastHourly[1].hour);
 
-    //Variables
     var hourly_time = document.getElementsByClassName("hour-time");
     var hourly_icon = document.getElementsByClassName("hour-weather-icon");
     var hourly_temp = document.getElementsByClassName("hour-weather-temp");
     var hourly_precip = document.getElementsByClassName("hour-weather-precip");
 
-    // The 1 at the end makes it update for an hour earlier than current.
     var startTime = parseInt(testSplit[1]) + 1;
     var endingTime = startTime + 7;
 
-
     for (var i = startTime; i < endingTime; i++) {
         hourly_time[i - startTime].innerHTML = timeParse(hourlyCast[i].time).toString();
-        setIcon(hourly_icon[i - startTime], weatherCodeConverter(hourlyCast[i].condition.code, DayOrNight(hourlyCast[i].condition.icon)));
+        setIcon(hourly_icon[i - startTime], weatherCodeConverter(hourlyCast[i].condition.code, hourlyCast[i].is_day));
         hourly_temp[i - startTime].innerHTML = Math.floor(hourlyCast[i].temp_f) + "°";
         hourly_precip[i - startTime].innerHTML = Math.floor(hourlyCast[i].chance_of_rain) + "%";
     }
@@ -125,7 +206,7 @@ const merge = (first, second) => {
 }
 
 
-function currentForecast(location, region, condition, temperature, feelsLike, windDir, windGust, windSpeed, visibility, humidity) {
+function currentForecast(location, region, condition, temperature, feelsLike, windDir, windGust, windSpeed, visibility, humidity, is_day) {
     var current_location = document.getElementById("current-location");
     var current_icon = document.getElementById("current-icon");
     var current_temp = document.getElementById("current-temp");
@@ -137,15 +218,14 @@ function currentForecast(location, region, condition, temperature, feelsLike, wi
     var current_visibility = document.getElementById("current-visibility");
 
     current_location.innerHTML = location + ", " + stateNameToAbbreviation(region);
-    setIcon(current_icon, weatherCodeConverter(condition.code, DayOrNight(condition.icon)));
+    setIcon(current_icon, weatherCodeConverter(condition.code, is_day));
     current_temp.innerHTML = Math.floor(temperature) + "°";
     current_weather.innerHTML = condition.text;
     current_realfeel.innerHTML = Math.floor(feelsLike) + "°";
     current_windspeed.innerHTML = windDir + " " + Math.floor(windSpeed) + " mph";
-    current_windgust.innerHTML = windGust + " mph";
+    current_windgust.innerHTML = Math.floor(windGust) + " mph";
     current_humidity.innerHTML = humidity + " %";
     current_visibility.innerHTML = visibility + " mi";
-
 }
 
 function fivedayForecast(forecastdays) {
@@ -168,28 +248,23 @@ function fivedayForecast(forecastdays) {
     }
 }
 
+function weatherCodeConverter(code, isday) {
 
-function DayOrNight(str) {
-    var test = str.split('/');
-    return test[5];
-}
-
-
-function weatherCodeConverter(code, condition) {
     const weatherCodes = []
 
-    if (code == 1000 && condition == "Day") {
-        weatherCodes[1000] = "Sunny"
-    } else {
+    if (code == 1000 && isday == 1) {
+        weatherCodes[1000] = "Sunny";
+    } else if (code == 1000 && isday == 0) {
         weatherCodes[1000] = "Clear";
     }
 
-    if (code == 1003 && condition == "Day") {
+    if (code == 1003 && isday == 1) {
         weatherCodes[1003] = "partly-cloudy-day";
-    } else {
+    } else if (code == 1003 && isday == 0) {
         weatherCodes[1003] = "partly-cloudy-night";
+    } else {
+        weatherCodes[1003] = "partly-cloudy-day";
     }
-
 
     weatherCodes[1006] = "Cloudy";
     weatherCodes[1009] = "Cloudy";
