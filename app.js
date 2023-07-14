@@ -12,7 +12,7 @@ window.addEventListener('load', () => {
                 const loc = document.querySelector(".search-bar input").value;
                 wc(loc);
             }
-
+            // this is a test
             //Initial call of the api with LAT / LNG
             wc(lat + "," + long);
 
