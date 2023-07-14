@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
             wc(lat + "," + long);
 
             //Initializing the map
-            var map = L.map('map').setView([lat, long], 10);
+            var map = L.map('map').setView([lat, long], 8);
             L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=fTElpc48VoiAtH54mdqW', {
                 attribution: '',
                 tileSize: 512,

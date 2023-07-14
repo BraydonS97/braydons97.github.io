@@ -228,7 +228,6 @@ body {
     background-color: rgb(33, 42, 75);
     display: flex;
     flex-direction: column;
-    background-color: rgb(33, 42, 75);
     width: 350px;
     min-width: 250px;
     border-radius: 10px;
@@ -291,7 +290,6 @@ body {
     background-color: rgb(33, 42, 75);
     display: flex;
     flex-direction: column;
-    background-color: rgb(33, 42, 75);
     width: 350px;
     min-width: 250px;
     height: 175px;
