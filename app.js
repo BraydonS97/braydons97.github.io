@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
                     hourlyForecast(last_updated, forecastday);
                     SunriseSunset(forecastday);
                     airQuality(air_quality);
-                    alert(alerts);
+                    displayAlerts(alerts);
 
                     // Sets new Markers position and pans to it.
                     const latlonarr = { lat, lon };
@@ -75,8 +75,9 @@ window.addEventListener('load', () => {
 })
 
 // Grabs alert data and displays it in the appropriate div.
-function alert(alertdata) {
-    var divs = document.getElementsByClassName("alert-template");
+function displayAlerts(alertdata) {
+    const divs = document.getElementsByClassName("alert-template");
+
     while (divs[0]) {
         divs[0].parentNode.removeChild(divs[0]);
     }
@@ -234,32 +235,32 @@ function fivedayForecast(forecastdays) {
     var fiveday_date = document.getElementsByClassName("FDB-date");
     var fiveday_wind = document.getElementsByClassName("FDB-windspeed");
 
-    for (var i = 0; i < 5; i++) {
+
+    for (var i = 0; i < fiveday_icon.length; i++) {
         fiveday_temphigh[i].innerHTML = Math.floor(forecastdays[i].day.maxtemp_f) + "°";
         fiveday_templow[i].innerHTML = Math.floor(forecastdays[i].day.mintemp_f) + "°";
         fiveday_wind[i].innerHTML = Math.floor(forecastdays[i].day.maxwind_mph) + " mph";
         fiveday_precip[i].innerHTML = forecastdays[i].day.daily_chance_of_rain + "%";
         fiveday_desc[i].innerHTML = forecastdays[i].day.condition.text;
-        setIcon(fiveday_icon[i], weatherCodeConverter(forecastdays[i].day.condition.code));
+        setIcon(fiveday_icon[i], weatherCodeConverter(forecastdays[i].day.condition.code, 1));
         fiveday_date[i].innerHTML = dateParse(forecastdays[i].date);
     }
 }
 
 // Returns condition based on code.
 function weatherCodeConverter(code, isday) {
+
     const weatherCodes = []
 
-    if (code == 1000 && isday == 1) {
+    if (code == 1000 && isday == 0) {
+        weatherCodes[1000] = "Clear"
+    } else if (code == 1000 && isday == 1 || null) {
         weatherCodes[1000] = "Sunny";
-    } else if (code == 1000 && isday == 0) {
-        weatherCodes[1000] = "Clear";
     }
 
-    if (code == 1003 && isday == 1) {
-        weatherCodes[1003] = "partly-cloudy-day";
-    } else if (code == 1003 && isday == 0) {
+    if (code == 1003 && isday == 0) {
         weatherCodes[1003] = "partly-cloudy-night";
-    } else {
+    } else if (code == 1003 && isday == 1 || null) {
         weatherCodes[1003] = "partly-cloudy-day";
     }
 
