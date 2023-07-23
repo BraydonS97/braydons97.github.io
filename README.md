@@ -1,6 +1,6 @@
 Weather Project.
 
-For the website to be functional you must visit the cors-anywhere website and request temporary access to the demo server.
-# https://cors-anywhere.herokuapp.com/corsdemo
+
+# Note the website will only display 3 days of DATA due to the free API.
 Try it out here!
 # braydons97.github.io

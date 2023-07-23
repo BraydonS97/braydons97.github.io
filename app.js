@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
                     const { condition, temp_f, feelslike_f, gust_mph, humidity, vis_miles, wind_dir, wind_mph, last_updated, is_day, air_quality } = data.current;
                     const { forecastday } = data.forecast;
                     const { alerts } = data;
-
+                    console.log(data);
                     // Calling the functions that sort/display the data.
                     fivedayForecast(forecastday);
                     currentForecast(name, region, condition, temp_f, feelslike_f, wind_dir, gust_mph, wind_mph, vis_miles, humidity, is_day);
@@ -235,8 +235,7 @@ function fivedayForecast(forecastdays) {
     var fiveday_date = document.getElementsByClassName("FDB-date");
     var fiveday_wind = document.getElementsByClassName("FDB-windspeed");
 
-
-    for (var i = 0; i < fiveday_icon.length; i++) {
+    for (var i = 0; i < forecastdays.length; i++) {
         fiveday_temphigh[i].innerHTML = Math.floor(forecastdays[i].day.maxtemp_f) + "°";
         fiveday_templow[i].innerHTML = Math.floor(forecastdays[i].day.mintemp_f) + "°";
         fiveday_wind[i].innerHTML = Math.floor(forecastdays[i].day.maxwind_mph) + " mph";
